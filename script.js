@@ -32,6 +32,60 @@ async function fetchNews(category, title) {
         console.error("There is an error", error);
     }
 }
+function displayNews(articles, title) {
+    // Clear existing content
+    news.innerHTML = "";
+
+    // Create and append the section heading
+    const head = document.createElement("div");
+    head.classList.add("news");
+    const tips = document.createElement("h1");
+    tips.textContent = `${title.toUpperCase()} NEWS`;
+    head.appendChild(tips);
+    news.appendChild(head);
+
+    // Create and append two grid containers
+    const grid = document.createElement("div");
+    grid.classList.add("grid1");
+    news.appendChild(grid);
+
+    const grid2 = document.createElement("div");
+    grid2.classList.add("grid2");
+    news.appendChild(grid2);
+
+    // Loop through the articles and create HTML elements
+    articles.forEach((article, i) => {
+        const container = (i < 4) ? grid : grid2;
+        const display = document.createElement("div");
+        display.classList.add("photo" + (i + 1));
+
+        const img = document.createElement("img");
+        img.classList.add("n" + (i + 1));
+        img.src = article.urlToImage || 'https://placehold.co/650x500';
+
+        const text = document.createElement("div");
+        text.classList.add("text" + (i + 1));
+
+        const titleElement = document.createElement("h2");
+        titleElement.textContent = article.title;
+        text.appendChild(titleElement);
+
+        if (i < 2) {
+            const description = document.createElement("p");
+            description.textContent = article.description || article.content;
+            text.appendChild(description);
+        }
+
+        display.appendChild(img);
+        display.appendChild(text);
+        display.addEventListener("click", () => {
+            window.open(article.url);     
+        });
+
+        container.appendChild(display);
+    });
+}
+
 
 function searchAPI(info) {
     const url = `https://newsapi.org/v2/everything?q=${info}&pageSize=13&apiKey=${apiKey}`;
