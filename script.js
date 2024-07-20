@@ -18,7 +18,7 @@ const btn1 = document.getElementById("search-7");
 const sch1 = document.getElementById("bt-8");
 const menubar=document.getElementById("menu");
 const searchnews=document.getElementById("search-news");
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const proxyUrl = 'https://api.allorigins.win/get?url=';
 
 async function fetchNews(category, title) {
     const url = `https://newsapi.org/v2/top-headlines?country=in${category ? `&category=${category}`: ''}&pageSize=14&apiKey=${apiKey}`;
