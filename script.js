@@ -54,76 +54,40 @@ function displayNews(articles, title) {
     news.appendChild(grid2);
 
     // Loop through the articles and create HTML elements
-    
     articles.forEach((article, i) => {
+        const display = document.createElement("div");
+        const img = document.createElement("img");
+        const text = document.createElement("div");
+        const titleElement = document.createElement("h2");
+        const description = document.createElement("p");
+
+        // Common class and properties for display and image
+        display.classList.add("photo" + (i + 1));
+        img.classList.add("n" + (i + 1));
+        img.src = article.urlToImage || 'https://placehold.co/600x400';
+        text.classList.add("text" + (i + 1));
+        titleElement.textContent = article.title;
+        description.textContent = article.description || article.content;
+
+        // Append title and description if within grid1 or grid2
+        text.appendChild(titleElement);
+        text.appendChild(description);
+
+        display.appendChild(img);
+        display.appendChild(text);
+        display.addEventListener("click", () => {
+            window.open(article.url);
+        });
+
+        // Append to appropriate grid based on index
         if (i < 4) {
-            const display = document.createElement("div");
-            display.classList.add("photo" + (i + 1));
-
-            const img = document.createElement("img");
-            img.classList.add("n" + (i + 1));
-            if (i == 0) {
-                img.src = article.urlToImage || 'https://placehold.co/650x500';
-            }
-            else if (i == 1) {
-                img.src = article.urlToImage || 'https://placehold.co/700x250'
-            }
-            else {
-                img.src = article.urlToImage || 'https://placehold.co/350x240'
-            }
-
-            const text = document.createElement("div");
-            text.classList.add("text" + (i + 1));
-
-            const title = document.createElement("h2");
-            title.textContent = article.title;
-            text.appendChild(title);
-
-            if (i < 2) {
-                const description = document.createElement("p");
-                description.textContent = article.description || article.content;
-                // console.log(article.description);
-
-                text.appendChild(description);
-            }
-
-            display.appendChild(img);
-            display.appendChild(text);
-            display.addEventListener("click", () => {
-                window.open(article.url);
-            })
-
             grid.appendChild(display);
         } else {
-            const grid2Display = document.createElement("div");
-            grid2Display.classList.add("photo" + (i + 1));
-
-            const grid2Img = document.createElement("img");
-            grid2Img.classList.add("n" + (i + 1));
-            grid2Img.src = article.urlToImage || 'https://placehold.co/600x400';
-            const text = document.createElement("div");
-            text.classList.add("text" + (i + 1));
-
-            const grid2Title = document.createElement("h2");
-            grid2Title.textContent = article.title;
-            text.appendChild(grid2Title)
-
-
-            const grid2Description = document.createElement("p");
-            grid2Description.textContent = article.description || article.content;
-            text.appendChild(grid2Description)
-
-            grid2Display.appendChild(grid2Img);
-            grid2Display.appendChild(text);
-            grid2Display.addEventListener("click", () => {
-                window.open(article.url);
-
-            })
-
-            grid2.appendChild(grid2Display);
+            grid2.appendChild(display);
         }
     });
 }
+
 
 
 function searchAPI(info) {
