@@ -32,6 +32,11 @@
             if (response.status === 429) {
                 alert('Too many requests. Please try again later.');
                 return;
+            }
+            else if (response.status === 426) {
+            alert('The server requires an upgrade. Please check the API documentation.');
+            return;
+                }
             } else if (response.ok) {
                 const data = await response.json();
                 console.log(data.articles);
