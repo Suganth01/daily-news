@@ -24,8 +24,6 @@
       ? `https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=14&apiKey=${apiKey}`
       : `https://newsapi.org/v2/top-headlines?country=us&pageSize=14&apiKey=${apiKey}`;
 
-
-
         try {
             const response = await fetch(url);
             console.log(response)
@@ -34,9 +32,7 @@
                 return;
             }
             else if (response.status === 426) {
-            alert('The server requires an upgrade. Please check the API documentation.');
-            return;
-                }
+                    throw new Error('The server requires a protocol upgrade (426). Please check your request URL.');
             } else if (response.ok) {
                 const data = await response.json();
                 console.log(data.articles);
