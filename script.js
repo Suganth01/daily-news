@@ -21,7 +21,7 @@ const searchnews = document.getElementById("search-news");
 const proxyUrl = 'https://api.allorigins.win/get?url=';
 
 async function fetchNews(category, title) {
-    const url = `https://newsapi.org/v2/top-headlines?country=in${category ? `&category=${category}` : ''}&pageSize=14&apiKey=${apiKey}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=${info}&pageSize=14&apiKey=${apiKey}`;
     try {
         const response = await fetch(proxyUrl + encodeURIComponent(url));
         const data = await response.json();
