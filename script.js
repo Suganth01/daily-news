@@ -12,7 +12,7 @@
     let link8 = document.getElementById("entertainment-2");
     let link9 = document.getElementById("health-3");
     let link10 = document.getElementById("science-4");
-    let link11 = document.getElementById("sports-5");
+    let link11 = document.getElementById("sports-5");   
     let link12 = document.getElementById("technology-6");
     const btn1 = document.getElementById("search-7");
     const sch1 = document.getElementById("bt-8");
@@ -21,8 +21,8 @@
 
         async function fetchNews(category, title) {
             const url = category 
-      ? `https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=14&apiKey=${apiKey}`
-      : `https://newsapi.org/v2/top-headlines?country=us&pageSize=14&apiKey=${apiKey}`;
+      ? `https://api.allorigins.win/raw?url=https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=14&apiKey=${apiKey}`
+      : `https://api.allorigins.win/raw?url=https://newsapi.org/v2/top-headlines?country=us&pageSize=14&apiKey=${apiKey}`;
 
         try {
             const response = await fetch(url);
